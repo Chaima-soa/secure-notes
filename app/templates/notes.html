@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Notes - Secure Notes</title>
+</head>
+
+<body>
+
+    <h1>🔐 Secure Notes</h1>
+
+    <hr>
+
+    <p>
+        Logged in as:
+        <strong>{{ session["username"] }}</strong>
+    </p>
+
+    <p>
+        <a href="{{ url_for('auth.profile') }}">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="{{ url_for('notes.index') }}">
+            <button>📝 My Notes</button>
+        </a>
+
+        <a href="{{ url_for('notes.create') }}">
+            <button>➕ Create Note</button>
+        </a>
+
+        <a href="{{ url_for('auth.logout') }}">
+            <button>🚪 Logout</button>
+        </a>
+    </p>
+
+    <hr>
+
+    <h2>📝 My Notes</h2>
+
+    <p>
+        <a href="{{ url_for('notes.create') }}">
+            <button>➕ Create a New Note</button>
+        </a>
+    </p>
+
+    {% if notes %}
+
+        {% for note in notes %}
+
+            <article>
+
+                <h3>{{ note.title }}</h3>
+
+                <p>
+                    {{ note.content }}
+                </p>
+
+                <p>
+                    Created: {{ note.created_at }}
+                </p>
+
+                <p>
+                    Updated: {{ note.updated_at }}
+                </p>
+
+                <a href="{{ url_for('notes.view', note_id=note.id) }}">
+                    <button>👁️ View</button>
+                </a>
+
+                <form
+                    method="POST"
+                    action="{{ url_for('notes.delete', note_id=note.id) }}"
+                    style="display:inline;"
+                >
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                    >
+
+                    <button type="submit">
+                        🗑️ Delete
+                    </button>
+
+                </form>
+
+            </article>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No notes yet.</p>
+
+        <p>
+            <a href="{{ url_for('notes.create') }}">
+                Create your first note
+            </a>
+        </p>
+
+    {% endif %}
+
+</body>
+</html>

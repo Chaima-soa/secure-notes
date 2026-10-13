@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Secure Notes</title>
+</head>
+
+<body>
+
+    <h1>🔐 Secure Notes</h1>
+
+    <hr>
+
+    <p>
+        Welcome,
+        <strong>{{ session["username"] }}</strong>
+    </p>
+
+    <p>
+        Role:
+        <strong>{{ session["role"] }}</strong>
+    </p>
+
+    <hr>
+
+    <h2>Navigation</h2>
+
+    <p>
+
+        <a href="{{ url_for('auth.profile') }}">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="{{ url_for('notes.index') }}">
+            <button>📝 My Notes</button>
+        </a>
+
+        <a href="{{ url_for('notes.create') }}">
+            <button>➕ Create Note</button>
+        </a>
+
+        <a href="{{ url_for('auth.logout') }}">
+            <button>🚪 Logout</button>
+        </a>
+
+    </p>
+
+    <hr>
+
+    <h2>📝 My Secure Notes</h2>
+
+    <p>
+        Create and manage your personal encrypted notes.
+    </p>
+
+    <ul>
+        <li>🔐 Your notes are encrypted.</li>
+        <li>👤 You can only access your own notes.</li>
+        <li>🛡️ Unauthorized users receive HTTP 403.</li>
+    </ul>
+
+</body>
+</html>
