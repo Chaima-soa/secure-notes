@@ -9,3 +9,4 @@
 | T11 | Serve the app over HTTPS with an OpenSSL certificate and enable the Secure cookie flag | TLS 1.2+ negotiated, cookie flagged Secure | TLS 1.3 negotiated, Secure=true | OPENSSL_cert.png, OPENSSL_tls.png, HTTPS_headers.png, T10_cookie_https.png |
 | T05 | IDOR - Access another user's note by changing the ID | 403 Forbidden or Access Denied | 403 Forbidden | T05_idor.png |
 | T14 | Replay a session cookie after logout (Burp Repeater) | Session rejected after logout | Known limitation: the old cookie is still accepted until it expires (30 min). Flask stores the session in a signed client-side cookie, so the server cannot revoke it | T14_session_replay.png |
+| T16 | Automated test suite (pytest): authentication, lockout, access control, IDOR, AES-GCM, HMAC, security headers | All tests pass | 21 passed | PYTEST_passed.png |
